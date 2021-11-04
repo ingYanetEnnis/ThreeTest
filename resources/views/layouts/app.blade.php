@@ -20,6 +20,8 @@
 <script>
     var apiUrl = '{{ env('API_URL') }}';
     var facebookId = '{{ env('FACEBOOK_ID') }}';
+    var user = '{{ \Illuminate\Support\Facades\Auth::user() }}';
+    var _token = '{{ csrf_token() }}';
 </script>
 @yield('content')
 

@@ -1,19 +1,17 @@
 <?php
-namespace App\Http\Controllers\Api;
+
+
+namespace App\Http\Controllers;
+
+
+use App\Http\Controllers\Api\BaseApiController;
 use App\Models\User;
-use App\Services\AphavantageServiceApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class AuthController extends BaseApiController
+class LoginController extends BaseApiController
 {
-
-    /**
-     * Login api
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function login(Request $request)
     {
         $dataUser = $request->request->all();
@@ -23,15 +21,11 @@ class AuthController extends BaseApiController
             $dataUser
         );;
         $success['url'] =  route('dashboard');
+        //$success['token'] =  $user->createToken('MyApp')->accessToken;
+        Auth::login($user);
         return $this->sendResponse($success);
-
     }
 
-    /**
-     * Login api
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function logout(Request $request)
     {
         Auth::logout();

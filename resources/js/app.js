@@ -8,16 +8,10 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import vSelect from 'vue-select'
 Vue.component('v-select', vSelect)
 import 'vue-select/dist/vue-select.css';
-
-const token = localStorage.getItem('token')
-if (!token) {
-    localStorage.setItem('token', window.user.token);
-}
 store.commit('setUser', window.user);
 
 const app = new Vue({
     el: '#app',
     store,
-    //components : {App}
     render: h => h(App)
 });
