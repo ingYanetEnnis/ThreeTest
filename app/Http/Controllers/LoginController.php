@@ -21,7 +21,6 @@ class LoginController extends BaseApiController
             $dataUser
         );;
         $success['url'] =  route('dashboard');
-        //$success['token'] =  $user->createToken('MyApp')->accessToken;
         Auth::login($user);
         return $this->sendResponse($success);
     }
