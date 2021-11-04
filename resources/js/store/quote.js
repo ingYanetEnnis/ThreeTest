@@ -17,12 +17,16 @@ const actions = {
             symbol: payload
         }}).then((response) => {
             context.commit('setQuoteCurrent', response.data.data)
+            context.commit('addQuotes', response.data.data)
         })
     },
 };
 const mutations = {
     setQuotes(state, payload){
         state.quotes = payload
+    },
+    addQuotes(state, payload){
+        state.quotes.push(payload)
     },
     setQuoteCurrent(state, payload){
         state.quoteCurrent = payload;

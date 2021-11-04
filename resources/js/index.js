@@ -2,9 +2,6 @@ function statusChangeCallback(response) {
     if (response.status === 'connected' && window.location.pathname != '/dashboard' ) {
         loginAPI();
     }
-    
-    //FB.logout(handleSessionResponse);
-
 }
 window.checkLoginState = function() {
     FB.getLoginStatus(function (response) {
@@ -20,8 +17,6 @@ window.fbAsyncInit = function () {
         xfbml: true,
         version: 'v12.0'
     });
-
-
     FB.getLoginStatus(function (response) {
        statusChangeCallback(response);
     });

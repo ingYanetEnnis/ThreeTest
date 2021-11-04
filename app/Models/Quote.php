@@ -22,7 +22,7 @@ class Quote extends Model
         'low',
         'price',
         'latest_trading_day',
-        'symbol_id',
+        'symbols_id',
         'user_id',
     ];
 
@@ -39,7 +39,7 @@ class Quote extends Model
      */
     public function symbol()
     {
-        return $this->belongsTo(Symbol::class);
+        return $this->belongsTo(Symbol::class, 'symbols_id');
     }
 
     /**

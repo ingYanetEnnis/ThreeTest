@@ -50,7 +50,7 @@ class QuoteController extends BaseApiController
                 'low' => $quote['04. low'],
                 'price' => $quote['05. price'],
                 'latest_trading_day' => $quote['07. latest trading day'],
-                'symbol_id' => $symbol->id,
+                'symbols_id' => $symbol->id,
                 'user_id' => Auth::user()->id
             ]);
             $response['symbol'] = $symbol->toArray();

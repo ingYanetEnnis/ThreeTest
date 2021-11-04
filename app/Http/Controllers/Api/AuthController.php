@@ -8,15 +8,6 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends BaseApiController
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware(['cors']);
-    }
 
     /**
      * Login api
