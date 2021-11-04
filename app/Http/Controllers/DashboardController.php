@@ -23,8 +23,6 @@ class DashboardController extends Controller
 
     public function index(){
         $user = User::find(1);
-        //$user = Auth::user()->toArray();
-
         $user['token'] = $user->createToken('MyApp')->accessToken;
         return view('welcome', ['user' => $user->toArray()]);
     }

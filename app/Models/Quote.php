@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Quote extends Model
 {
@@ -21,10 +22,12 @@ class Quote extends Model
         'low',
         'price',
         'latest_trading_day',
+        'symbol_id',
+        'user_id',
     ];
 
     /**
-     * Get the user that owns the phone.
+     * Get the user that owns the quote.
      */
     public function user()
     {
@@ -32,10 +35,21 @@ class Quote extends Model
     }
 
     /**
-     * Get the user that owns the phone.
+     * Get the symbol that owns the quote.
      */
     public function symbol()
     {
-        return $this->belongsTo(Symbol::class, 'symbols_id', );
+        return $this->belongsTo(Symbol::class);
+    }
+
+    /**
+     * Apply the scope to a given Eloquent query builder.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return void
+     */
+    public function scopeByUser($query)
+    {
+        $query->where('user_id', Auth::user()->id);
     }
 }

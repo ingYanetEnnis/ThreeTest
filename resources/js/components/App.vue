@@ -1,13 +1,5 @@
 <template>
-    <!-- This example requires Tailwind CSS v2.0+ -->
-    <!--
-      This example requires updating your template:
 
-      ```
-      <html class="h-full bg-gray-100">
-      <body class="h-full">
-      ```
-    -->
     <div class="min-h-full">
         <nav class="bg-gray-800">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -16,25 +8,6 @@
                         <div class="flex-shrink-0">
                             <img class="h-8 w-8" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
                                  alt="Workflow">
-                        </div>
-                        <div class="hidden md:block">
-                            <div class="ml-10 flex items-baseline space-x-4">
-                                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                                <a href="#" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
-                                   aria-current="page">Welcome {{user.first_name}}</a>
-
-                                <a href="#"
-                                   class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Team</a>
-
-                                <a href="#"
-                                   class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Projects</a>
-
-                                <a href="#"
-                                   class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Calendar</a>
-
-                                <a href="#"
-                                   class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Reports</a>
-                            </div>
                         </div>
                     </div>
                     <div class="hidden md:block">
@@ -92,28 +65,23 @@
         </header>
         <main>
             <form-quote/>
+            <card-quote-current v-if="quoteCurrent" :quote="quoteCurrent"/>
             <history-quotes/>
         </main>
     </div>
 </template>
 
 <script>
+import CardQuoteCurrent from "./CardQuoteCurrent";
 import HistoryQuotes from "./HistoryQuotes";
 import FormQuote from "./FormQuote";
 import {mapState} from 'vuex'
 
 export default {
-    components: {HistoryQuotes, FormQuote},
+    components: {HistoryQuotes, FormQuote, CardQuoteCurrent},
     computed: mapState({
-        user: state => state.auth.user
+        user: state => state.auth.user,
+        quoteCurrent: state => state.quote.quoteCurrent
     }),
-    created() {
-
-    },
-    methods: {
-        lol: function () {
-
-        }
-    }
 }
 </script>

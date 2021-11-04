@@ -20,9 +20,7 @@ class CreateQuotesTable extends Migration
             $table->double('low');
             $table->double('price');
             $table->dateTime('latest_trading_day');
-           // $table->unsignedBigInteger('symbol_id');
             $table->foreignId('symbols_id')->constrained();
-          //  $table->unsignedBigInteger('user_id');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });

@@ -4,6 +4,8 @@
 namespace App\Http\Controllers\Api;
 
 
+use App\Http\Resources\QuoteResource;
+
 use App\Models\Quote;
 use App\Models\Symbol;
 use App\Services\AphavantageServiceApi;
@@ -20,8 +22,9 @@ class QuoteController extends BaseApiController
      */
     public function index()
     {
-        $quotes = Quote::all();
-        return $this->sendResponse($quotes, 'Products retrieved successfully.');
+        $quotes = Quote::with('symbol')->byUser()->get();
+
+        return $this->sendResponse($quotes);
     }
     /**
      * Display a listing of the resource.
@@ -30,25 +33,29 @@ class QuoteController extends BaseApiController
      */
     public function quoteBySymbol(Request $request, AphavantageServiceApi $api)
     {
-        $globalQuote = $api->latestPrice($request->symbol);
+        $symbol = json_decode($request->request->get('symbol'), true);
+
+        $globalQuote = $api->latestPrice($symbol);
+        $response = null;
         if (isset($globalQuote['Global Quote'])) {
             $symbol = Symbol::firstOrCreate(
-                ['symbol' => $request->symbol->symbol],
-                $request->symbol
+                ['symbol' => $symbol['symbol']],
+                $symbol
             );
+
             $quote = $globalQuote['Global Quote'];
-            $newQuote = Quote::create([
+            $response = Quote::create([
                 'open' => $quote['02. open'],
                 'high' => $quote['03. high'],
                 'low' => $quote['04. low'],
-                'price' => $quote['3312.7500'],
-                'latest_trading_day' => $quote['07. latest trading day']
+                'price' => $quote['05. price'],
+                'latest_trading_day' => $quote['07. latest trading day'],
+                'symbol_id' => $symbol->id,
+                'user_id' => Auth::user()->id
             ]);
-            $newQuote->user()->associate(Auth::user());
-            $newQuote->symbol()->associate($symbol);
-
+            $response['symbol'] = $symbol->toArray();
         }
-        return $this->sendResponse($newQuote->toArray(), 'Products retrieved successfully.');
+        return $this->sendResponse($response);
     }
 
     /**
@@ -58,6 +65,6 @@ class QuoteController extends BaseApiController
      */
     public function symbols($match, AphavantageServiceApi $api)
     {
-        return $this->sendResponse($api->matchSymbols($match), 'Products retrieved successfully.');
+        return $this->sendResponse($api->matchSymbols($match));
     }
 }

@@ -33,8 +33,8 @@ class AuthController extends BaseApiController
         );;
         $token =  $user->createToken('MyApp')->accessToken;
         //$success['data'] =  $user->toArray();
-        $success['url'] =  route('dashboard', ['token' => $token]);
-        return $this->sendResponse($success, 'User login successfully.');
+        $success['url'] =  route('dashboard');
+        return $this->sendResponse($success);
 
     }
 }

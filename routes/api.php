@@ -7,5 +7,5 @@ Route::middleware(['cors'])->post('login', [\App\Http\Controllers\Api\AuthContro
 Route::middleware('auth:api')->group( function () {
     Route::get('quotes', [\App\Http\Controllers\Api\QuoteController::class, 'index']);
     Route::get('quote', [\App\Http\Controllers\Api\QuoteController::class, 'quoteBySymbol']);
-    Route::get('symbols', [\App\Http\Controllers\Api\QuoteController::class, 'symbols']);
+    Route::get('symbols/{match}', [\App\Http\Controllers\Api\QuoteController::class, 'symbols']);
 });

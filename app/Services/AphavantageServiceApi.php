@@ -17,12 +17,17 @@ class AphavantageServiceApi
 
     public function latestPrice($symbol){
 
-        $quote = Http::get($this->uri, ['function' => 'GLOBAL_QUOTE', 'symbol'=> $symbol->symbol, 'apikey' => $this->apiKey])->body();
-       // QuoteRetrieved::dispatch($symbol, $quote);
+        $quote = Http::get($this->uri, ['function' => 'GLOBAL_QUOTE', 'symbol'=> $symbol['symbol'], 'apikey' => $this->apiKey])->json();
         return $quote;
+       // QuoteRetrieved::dispatch($symbol, $quote);
     }
 
     public function matchSymbols($match){
-        return Http::get($this->uri, ['function' => 'SYMBOL_SEARCH', 'keywords'=> $match, 'apikey' => $this->apiKey])->body();
+        $symbolsMatch = Http::get($this->uri, ['function' => 'SYMBOL_SEARCH', 'keywords'=> $match, 'apikey' => $this->apiKey])->json();
+        $symbols = [];
+        foreach ($symbolsMatch['bestMatches'] as $symbol) {
+            $symbols[] = ['name' => $symbol['2. name'], 'symbol' => $symbol['1. symbol']];
+        }
+        return $symbols;
     }
 }
