@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-Route::middleware(['cors'])->post('login', [\App\Http\Controllers\Api\AuthController::class, 'login']);
+Route::post('login', [\App\Http\Controllers\Api\AuthController::class, 'login']);
+Route::post('logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
 
 Route::middleware('auth:api')->group( function () {
     Route::get('quotes', [\App\Http\Controllers\Api\QuoteController::class, 'index']);

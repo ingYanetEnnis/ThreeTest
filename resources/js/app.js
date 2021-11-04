@@ -18,5 +18,6 @@ store.commit('setUser', window.user);
 const app = new Vue({
     el: '#app',
     store,
+    //components : {App}
     render: h => h(App)
 });

@@ -23,7 +23,7 @@ class AuthController extends BaseApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function login(Request $request, AphavantageServiceApi $api)
+    public function login(Request $request)
     {
         $dataUser = $request->request->all();
         $dataUser['password'] = Hash::make($request->facebook_id);
@@ -31,10 +31,18 @@ class AuthController extends BaseApiController
             ['facebook_id' => $request->facebook_id],
             $dataUser
         );;
-        $token =  $user->createToken('MyApp')->accessToken;
-        //$success['data'] =  $user->toArray();
         $success['url'] =  route('dashboard');
         return $this->sendResponse($success);
 
+    }
+
+    /**
+     * Login api
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function logout(Request $request)
+    {
+        Auth::logout();
     }
 }
