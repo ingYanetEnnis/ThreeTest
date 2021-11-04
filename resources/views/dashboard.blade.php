@@ -17,11 +17,12 @@
                         <!-- Profile dropdown -->
                         <div class="ml-3 relative">
                             <div>
-                                <button type="button"
-                                        class="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                                        id="logout_facebook" aria-expanded="false" aria-haspopup="true">
-                                    <label>LOGOUT</label>
-                                </button>
+                                <a href="#" id="logout_facebook" class="group border-l pl-6 border-gray-200 hover:text-teal-600 flex items-center">
+                                    Sign Out
+                                    <svg aria-hidden="true" width="11" height="10" fill="none" class="flex-none ml-1.5 text-gray-400 group-hover:text-teal-600">
+                                        <path d="M5.593 9.638L10.232 5 5.593.36l-.895.89 3.107 3.103H0v1.292h7.805L4.698 8.754l.895.884z" fill="currentColor"></path>
+                                    </svg>
+                                </a>
                             </div>
                         </div>
                     </div>

@@ -12,7 +12,7 @@ window.checkLoginState = function() {
 
 window.fbAsyncInit = function () {
     FB.init({
-        appId: '4625825104143973',
+        appId: facebookId,
         cookie: true,
         xfbml: true,
         version: 'v12.0'
@@ -36,7 +36,7 @@ function loginAPI() {
         response.password = response.id;
         $.ajax({
             method: "POST",
-            url: "/api/login",
+            url: apiUrl+'/login',
             data: response
         })
             .done(function (response) {
@@ -49,7 +49,7 @@ function loginAPI() {
 function logoutAPI() {
     $.ajax({
         method: "POST",
-        url: "/api/logout",
+        url: apiUrl+'/logout',
         data: "{{ csrf_token() }}"
     })
         .done(function () {
